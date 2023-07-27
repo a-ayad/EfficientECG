@@ -1,0 +1,39 @@
+{
+  "ecg_channels" : {
+    "0" : "I",
+    "1": "II",
+    "2": "III",
+    "3": "AVR",
+    "4": "AVl",
+    "5": "AVF",
+    "6": "V1",
+    "7": "V2",
+    "8": "V3",
+    "9": "V4",
+    "10": "V5",
+    "11": "V6"
+  },
+  "num_channels": 12,
+
+  "classes": {
+    "0" : { "normal" : ["NORM"]},
+    "1" : { "myocardinfarct" : ["IMI", "ASMI", "AMI", "ALMI", "INJAS", "LMI", "ILMI", "INJAL", "IPLMI", "IPMI", "INJIN", "INJLA", "PMI", "INJIL"]},
+     "2" : { "CD" : ["LAFB", "IRBBB", "1AVB", "IVCD", "CRBBB", "CLBBB", "LPFB", "WPW", "ILBBB", "3AVB", "2AVB"]},
+     "3" : { "hyp" : ["LHV", "LAO/LAE", "RVH", "RAO/RAE", "SEHYP"]},
+     "4" : { "sttc" : ["NDT", "NST_", "DIG", "LNGQT", "ISC_", "ISCAL", "ISCIN", "ISCIL", "ISCAS", "ISCLA", "ANEUR", "EL", "ISCAN"]}
+  },
+  "num_classes" : 5,
+  "sample_rate" : 100,
+  "split" : {
+    "train" : 70,
+    "val" : 20,
+    "test" : 10
+  },
+  "random_split" : "True",
+  "normalization": "z-score",
+  "multisamples": 3,
+  "sample_length": 0.25,
+  "sample_length_test": 1,
+  "multisamples_test" : 1,
+  "multisample_length" : 1
+}

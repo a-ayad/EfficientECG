@@ -1,15 +1,6 @@
-import torch
 from torch import nn
+from util.layer import AdaptiveConcatPool1d
 
-##### From Fast.ai
-class AdaptiveConcatPool1d(nn.Module):
-    "Layer that concats `AdaptiveAvgPool1d` and `AdaptiveMaxPool1d`."
-    def __init__(self, sz=None):
-        "Output will be 2*sz or 2 if sz is None"
-        super().__init__()
-        sz = sz or 1
-        self.ap,self.mp = nn.AdaptiveAvgPool1d(sz), nn.AdaptiveMaxPool1d(sz)
-    def forward(self, x): return torch.cat([self.mp(x), self.ap(x)], 1)
 
 class WangFCNTorch(nn.Module):
     def __init__(self, channel_width, channels, output_size, batch_size):

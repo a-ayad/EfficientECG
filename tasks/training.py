@@ -4,8 +4,10 @@ from torch.utils.data import DataLoader
 from tqdm import tqdm
 
 import wandb
+
+import models.TCNTorch
 from models import wangFCN as wangFCNtorch, singh_lstm as singh_lstmTorch, singh_gru as singh_gruTorch, \
-    XResNet as xResNetTorch, TCNTorch as TCNTorch, SmallTCN as SmallTCN
+    XResNet as xResNetTorch, TCNTorch as TCNTorch
 from util import datahandler as dh
 
 
@@ -30,7 +32,7 @@ def train(config):
     if config.architecture == 'TCN4':
         model = TCNTorch.Small_TCN_4(specification['num_classes'])
     if config.architecture == 'SmallTCN':
-        model = SmallTCN.Small_TCN()
+        model = models.TCNTorch.Small_TCN_3()
     if model is None:
         exit(0)
     if config.log:

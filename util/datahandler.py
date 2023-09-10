@@ -25,7 +25,7 @@ def write_record_samples(samples: list, filename: str) -> None:
 
 def read_record(filename):
     """
-        Read s specified dataset from disk
+        Reads specified dataset from disk
     :rtype: object
     """
     raw_dataset = tf.data.TFRecordDataset(filename)

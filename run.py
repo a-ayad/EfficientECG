@@ -4,10 +4,8 @@ import os
 import sys
 
 import datasets.PTBXL as ptbxl
-# from tasks.benchmark_remote import rpc_benchmark
-from tasks.testing import test_model # export_model
+from tasks.testing import test_model
 from tasks.training import train
-# from tasks.feature_importance import  get_feature_importance
 
 
 def create_config():
@@ -22,12 +20,6 @@ def create_config():
                                          help='Set this flag for training')
     parser.add_argument('--test', action='store_true',
                         default=False, help='Set this flag for testing')
-    parser.add_argument('--export_tvm', action='store_true',
-                        default=False, help='Set this flag to export Model ')
-    parser.add_argument('--feature_importance', action='store_true',
-                        default=False, help='Set this flag to get Feature Importance ')
-    parser.add_argument('--run_remotely', action='store_true',
-                        default=False, help='Set this flag to export Model ')
     parser.add_argument('--preprocess', action='store_true',
                         default=False, help='Set this flag to preprocess data')
     parser.add_argument('--debug', action='store_true',
@@ -37,22 +29,19 @@ def create_config():
     parser.add_argument('--epochs', type=int, metavar='epochs',
                         default=1, help='Number of Epochs for training')
     parser.add_argument('--architecture', type=str, metavar='Arch',
-                        choices=['wangFCN', 'xResNet', 'TCN',
+                        choices=['wangFCN', 'xResNet', 'TCN5',
                                  'singh_LSTM', 'singh_GRU',
-                                 'SmallTCN', 'TCN4'])
+                                 'TCN3', 'TCN4'])
     parser.add_argument('--dataset', type=str, metavar='dataset',
                         choices=['PTB-XL'], default='PTB-XL')
-    parser.add_argument('--ip', type=str, metavar='dataset')
     parser.add_argument('--learning_rate', type=float, metavar='LR',
                         default=0.001, help='Initial Learning Rate')
     parser.add_argument('--optimizer', type=str, metavar='Opt',
                         default='Adam', choices=['Adam'])
-    parser.add_argument('--target', type=str, metavar='Opt',
-                        choices=['host', 'jetson'])
     parser.add_argument('--overwrite', action='store_true',
                         default=False, help='Ignore existing checkpoints')
     parser.add_argument('--log', action='store_true',
-                        default=False, help='Log to W and b')
+                        default=False, help='Log to wandb')
     try:
         config = parser.parse_args()
         if sum([config.train, config.test,
@@ -136,12 +125,7 @@ def main():
         train(config)
     if config.test:
         test_model(config)
-    if config.export_tvm:
-        export_model(config)
-    if config.run_remotely:
-        rpc_benchmark(config)
-    if config.feature_importance:
-        get_feature_importance(config)
+
 
 
 def preprocess(config):

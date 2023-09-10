@@ -2,7 +2,6 @@ from torch import nn
 from util.layer import AdaptiveConcatPool1d
 
 class ResnetBlock(nn.Module):
-
     def __init__(self, in_channels, size, stride, process_downsample=False):
         super(ResnetBlock, self).__init__()
         self.conv1 = nn.Conv1d(in_channels=in_channels, out_channels=size, kernel_size=5,stride=stride, padding=(2,))
@@ -14,7 +13,6 @@ class ResnetBlock(nn.Module):
         if process_downsample:
             self.downsample = nn.Conv1d(in_channels=128, out_channels=128, kernel_size=1, stride=(2,))
             self.downnorm = nn.BatchNorm1d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
-
 
     def forward(self, x):
         skip = x

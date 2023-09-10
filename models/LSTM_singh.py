@@ -3,9 +3,7 @@ from torch import nn
 
 from util.layer import AdaptiveConcatPoolRNN
 
-
 class Singh_lstmTorch(nn.Module):
-
     def __init__(self, output_size):
         super(Singh_lstmTorch, self).__init__()
         self.lstm = nn.LSTM(input_size=12, hidden_size=256, num_layers=2, dropout=0.4)

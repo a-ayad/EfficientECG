@@ -8,9 +8,8 @@ from tqdm import tqdm
 
 import wandb
 
-import models.TCNTorch
-from models import wangFCN as wangFCNtorch, singh_lstm as singh_lstmTorch, singh_gru as singh_gruTorch, \
-    XResNet as xResNetTorch, TCNTorch as TCNTorch
+from models import FCN_wang as wangFCNtorch, LSTM_singh as singh_lstmTorch, GRU_singh as singh_gruTorch, \
+    XResNet_wang as xResNetTorch, TCN as TCNTorch
 from util import datahandler as dh
 
 from torchmetrics.classification import Accuracy, F1Score, AUROC
@@ -33,12 +32,12 @@ def test_model(config):
     if config.architecture == 'xResNet':
         model = xResNetTorch.XResNet(specification['num_channels'],
                                      specification['num_classes'])
-    if config.architecture == 'TCN':
+    if config.architecture == 'TCN5':
         model = TCNTorch.Small_TCN_5()
     if config.architecture == 'TCN4':
         model = TCNTorch.Small_TCN_4(specification['num_classes'])
-    if config.architecture == 'SmallTCN':
-        model = models.TCNTorch.Small_TCN_3()
+    if config.architecture == 'TCN3':
+        model = TCNTorch.Small_TCN_3()
     if model is None:
         exit(0)
 
